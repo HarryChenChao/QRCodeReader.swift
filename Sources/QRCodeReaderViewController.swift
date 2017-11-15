@@ -46,6 +46,9 @@ public class QRCodeReaderViewController: UIViewController {
 
   /// The completion blocak that will be called when a result is found.
   public var completionBlock: ((QRCodeReaderResult?) -> Void)?
+    
+  /// preview layer bounds will be changed callback
+  public var previewLayerWillChange: ((CGRect) -> Void)?
 
   deinit {
     codeReader.stopScanning()
@@ -124,8 +127,8 @@ public class QRCodeReaderViewController: UIViewController {
 
   override public func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-
     codeReader.previewLayer.frame = view.bounds
+    previewLayerWillChange?(codeReader.previewLayer.frame)
   }
 
   // MARK: - Initializing the AV Components
