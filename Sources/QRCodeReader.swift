@@ -71,6 +71,9 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
   public lazy var previewLayer: AVCaptureVideoPreviewLayer = {
     return AVCaptureVideoPreviewLayer(session: self.session)
   }()
+    
+  /// Rect of interests in layer coordinates,it will be active after session running
+  public var rectInPreviewLayer: CGRect?
 
   /// An array of object identifying the types of metadata objects to process.
   public let metadataObjectTypes: [AVMetadataObject.ObjectType]
@@ -194,6 +197,9 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
     if !session.isRunning {
       sessionQueue.async {
         self.session.startRunning()
+        if let rect = self.rectInPreviewLayer{
+            self.metadataOutput.rectOfInterest = previewLayer.metadataOutputRectConverted(fromLayerRect: rect)
+        }
       }
     }
   }
