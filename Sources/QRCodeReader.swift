@@ -198,7 +198,7 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
       sessionQueue.async {
         self.session.startRunning()
         if let rect = self.rectInPreviewLayer{
-            self.metadataOutput.rectOfInterest = previewLayer.metadataOutputRectConverted(fromLayerRect: rect)
+            self.metadataOutput.rectOfInterest = self.previewLayer.metadataOutputRectConverted(fromLayerRect: rect)
         }
       }
     }
