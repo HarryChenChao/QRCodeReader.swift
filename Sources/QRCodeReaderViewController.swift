@@ -111,7 +111,7 @@ open class QRCodeReaderViewController: UIViewController {
 
   // MARK: - Responding to View Events
 
-  override func viewWillAppear(_ animated: Bool) {
+  override open func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
     if startScanningAtLoad {
@@ -119,13 +119,13 @@ open class QRCodeReaderViewController: UIViewController {
     }
   }
 
-  override func viewWillDisappear(_ animated: Bool) {
+  override open func viewWillDisappear(_ animated: Bool) {
     stopScanning()
 
     super.viewWillDisappear(animated)
   }
 
-  override func viewWillLayoutSubviews() {
+  override open func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     codeReader.previewLayer.frame = view.bounds
     previewLayerWillChange?(codeReader.previewLayer.frame)
